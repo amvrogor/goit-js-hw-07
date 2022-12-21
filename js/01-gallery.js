@@ -31,31 +31,22 @@ function onClick(evt) {
     `<img width="1280" height="720" src="${evt.target.dataset.source}">`
   );
   lightboxModal.show();
-  if (!basicLightbox.visible()) {
-    return;
-  } else {
+  if (basicLightbox.visible()) {
     document.addEventListener(
       "keyup",
       (evt) => {
         if (evt.code === "Escape") {
           lightboxModal.close();
-          //   console.log(evt);
+          // console.log(evt);
         }
       },
       { once: true }
     );
+  } else {
+    document.removeEventListener("keyup", (evt) => {
+      if (evt.code === "Escape") {
+        lightboxModal.close();
+      }
+    });
   }
 }
-
-// function onEscape() {
-//   document.addEventListener(
-//     "keyup",
-//     (evt) => {
-//       if (evt.code === "Escape") {
-//         basicLightbox.close();
-//         console.log(evt.code);
-//       }
-//     },
-//     { once: true }
-//   );
-// }
